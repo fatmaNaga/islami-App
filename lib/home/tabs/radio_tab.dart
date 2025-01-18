@@ -11,6 +11,7 @@ class RadioTab extends StatefulWidget {
 
 class _RadioTabState extends State<RadioTab> {
   int selectedIndex = 0;
+  bool isRadioSelected = true;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class _RadioTabState extends State<RadioTab> {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-         // crossAxisAlignment: CrossAxisAlignment.stretch,
+           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Image(
               image: AssetImage('assets/images/Logo.png'),
@@ -29,64 +30,112 @@ class _RadioTabState extends State<RadioTab> {
             ),
             const SizedBox(
               height: 20,
-            ),ToggleSwitch(
-              minWidth: 90.0,
+            ),
+            ToggleSwitch(
+              minWidth: 290.0,
               initialLabelIndex: 1,
               cornerRadius: 20.0,
               activeFgColor: Colors.white,
               inactiveBgColor: Theme.of(context).primaryColor,
               inactiveFgColor: Colors.white,
               totalSwitches: 2,
-              labels: const ['Radio', 'Receter'],
-             // icons: [FontAwesomeIcons.mars, FontAwesomeIcons.venus],
-              activeBgColors: [const [Colors.blue],[Colors.black.withOpacity(0.7)]],
+              labels: const ['Radio', 'Reciters'],
+              // icons: [FontAwesomeIcons.mars, FontAwesomeIcons.venus],
+              activeBgColors: [
+                const [Colors.blue],
+                [Colors.black.withOpacity(0.7)]
+              ],
               onToggle: (index) {
                 setState(() {
-                  selectedIndex=index!;
+                  selectedIndex = index!;
+                  isRadioSelected = index == 0;
                 });
                 print('switched to: $index');
-      
               },
             ),
-      
-            const SizedBox(
-              height: 20,
-            ),
             Expanded(
-                child: ListView.builder(
-                  itemCount:
-                  selectedIndex == 0 ? radioStaions.length : reciters.length,
-                  itemBuilder: (context, index) {
-                    final item =
-                    selectedIndex == 0 ? radioStaions[index] : reciters[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Container(decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(12),),
-                        child: ListTile(leading: const Icon(
-                          Icons.radio, color: Colors.black,),
-                          title: Text(item, style: const TextStyle(color: Colors
-                              .black, fontWeight: FontWeight.bold),),
-                          trailing: IconButton(onPressed: () {}, icon: const Icon(Icons
-                              .play_arrow, color: Colors.black,)),),),);
-                  },
-                ))
+              child: ListView.builder(
+                itemCount:
+                    isRadioSelected ? radioStations.length : reciters.length,
+                itemBuilder: (context, index) {
+                  final item =
+                      isRadioSelected ? radioStations[index] : reciters[index];
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    child: Stack(
+                      children: [
+                        // Background Container
+                        Container(
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          padding: const EdgeInsets.only(left: 5,right: 5),
+                          margin: const EdgeInsets.all(8.0),
+                          alignment: Alignment.center,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                item,
+                                style: const TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.play_arrow,
+                                        color: Colors.black),
+                                    onPressed: () {Image.asset('assets/images/soundWave 1.png');setState(() {
+
+                                    });},
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.volume_up,
+                                        color: Colors.black),
+                                    onPressed: () {},
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Image on top of the container
+                        const Positioned(
+                            bottom: 0,
+                            left: 2,
+                            right: 2,
+                            top: 2,
+                            //height: double.infinity,
+                            // width: double.infinity,
+
+                            child: Image(
+                              image: AssetImage('assets/images/Mosque-02.png'),
+                            )),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-final List<String> radioStaions=[
-  'Radio Ibrahim Al_Akdar',
-  'Radio AL_Qaria Yassen ',
-  'Radio Ahmed Al_ trabulsi',
-  'Radio Addokali Mohammad Alalim'
+
+List<String> radioStations = [
+  'Radio Ibrahim Al-Akdar',
+  'Radio Al-Qaria Yassen',
+  'Radio Ahmed Al-Trabulsi',
+  'Radio Addokali Mohammad Alalim',
 ];
-final List<String> reciters=[
-  'Ibrahim Al_Akdar',
-  'Akeam Alalaqmi',
-  'Majed Al_Enezi',
-  'Malik Shaibat Alhemed'
+List<String> reciters = [
+  'Ibrahim Al-Akdar',
+  'Akram Alalaqmi',
+  'Majed Al-Enezi',
+  'Malik Shaibat Alhamed',
 ];

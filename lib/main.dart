@@ -1,4 +1,6 @@
 
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:islamiproject/cache/cache_helper.dart';
 import 'package:islamiproject/hadeth_details/hadeth_details.dart';
@@ -10,7 +12,9 @@ import 'package:islamiproject/sura_details/sura_details.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
-  runApp(const MyApp());
+  runApp( DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => MyApp(),),);
 }
 
 class MyApp extends StatelessWidget {
@@ -19,6 +23,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
       themeMode: ThemeMode.light,

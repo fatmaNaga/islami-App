@@ -32,66 +32,72 @@ class _SebhaScreenState extends State<SebhaTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Image(
-              image: AssetImage('assets/images/Logo.png'),
-              height: 250,
-              width: 250,
-              alignment: Alignment.topCenter,
-             // fit: BoxFit.fill,
-            ),
-            const SizedBox(
-              height: 60,
-              width: 60,
-            ),
-            const Text('سَبِّحِ اسْمَ رَبِّكَ الأعلى',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w700)),
-            const SizedBox(width: 30,height: 30,),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                GestureDetector(
-                    onTap: incrementCounter,
-                    child: const Image(
-                      image: AssetImage('assets/images/SebhaBody 1.png'),
-                      height: 250,
-                      width: 350,
-                      fit: BoxFit.fill,
-                    )),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      dhikrPhrases[phase],
-                      style:  const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-
-                    ),
-                    Text(
-                      '$counter',
-                      style: const TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    )
-                  ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Positioned(
+                top: 0,
+                child: Image(
+                  image: AssetImage('assets/images/Logo.png'),
+                  height: 150,
+                  width: 150,
+                  alignment: Alignment.topCenter,
+                 // fit: BoxFit.fill,
                 ),
+              ),
+              const SizedBox(
+                height: 30,
+                width: 30,
+              ),
+              const Text('سَبِّحِ اسْمَ رَبِّكَ الأعلى',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 36,
+                      fontWeight: FontWeight.w700)),
+              const SizedBox(width: 70,height: 70,),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  GestureDetector(
+                      onTap: incrementCounter,
+                      child: const Image(
+                        image: AssetImage('assets/images/SebhaBody 1.png'),
+                        height: 250,
+                        width: 350,
+                        fit: BoxFit.fill,
+                      )),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        dhikrPhrases[phase],
+                        style:  const TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+
+                      ),
+                      Text(
+                        '$counter',
+                        style: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
 
 
-              ],
-            ),
+                ],
+              ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );
